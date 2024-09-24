@@ -1,0 +1,33 @@
+# Debemos indicar de donde va a agarrar las dependencias para poder importar los imports de Fundme.sol
+# Indicar: organizacion - nombre del repositorio - @version
+dependencies:
+  - smartcontractkit/chainlink-brownie-contracts@1.2.0
+
+compiler:
+  solc:
+    remappings: # Necesitamos que cada vez reemplaze los imports por la dependencia
+      - "@chainlink=smartcontractkit/chainlink-brownie-contracts@1.2.0"
+      #remappings:
+      #- "@chainlink/contracts/=lib/chainlink-brownie-contracts/contracts/src/"
+
+dotenv: .env
+networks:
+  sepolia:
+    eth_usd_price_feed: "0x68b315F1C72acb3b11BfDa6A6F17688C7b4Dd1c7"
+    verify: True
+  mainnet-fork-dev: # Es el nombre de la fork creada con Alchemy
+    eth_usd_price_feed: "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419"
+    verify: False # En las redes development no hacemos verificacion
+  development:
+    verify: False
+  ganache-local:
+    verify: False
+
+wallets:
+  from-key: ${PRIVATE_KEY}
+
+compiler:
+  solc:
+    version: 0.8.8
+
+
